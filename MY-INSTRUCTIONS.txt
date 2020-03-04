@@ -1,0 +1,43 @@
+*crééer rails ::
+- rails new --webpack -T rails-yelp-mvp
+
+*add - commit - hub create - push
+
+*si ajout de gem ::
+- echo "gem 'rspec-rails', group: [ :test ]" >> Gemfile
+- bundle install
+- add
+- commit
+
+*creation model + migration ::
+- rails generate model Restaurant name:string address:string category:string phone_number:Integer
+- rails generate model Review content:text rating:Integer restaurant:references
+
+*gestion 1 to many entre model et suppression auto des review qd delete restaurant
+-model restaurant :      has_many :reviews, dependent: :destroy
+-model review :          belongs_to :restaurant
+
+*insertion validate ds model ::
+- validates :name, uniqueness: true, presence: true
+- validates :address, presence: true
+- validates :category, inclusion: { in: ["chinese", "italian", "japanese", "french", "belgian"] }
+
+*tester les models avec consol
+
+--------
+
+JE CRÉÉ UNE ROUTE - SON CONTROLLER - SA VIEW ET ENSUITE LAUTRE ROUTE ET AINSI DE SUITE
+
+*creation route
+- utilisation resource avec only
+- qd la route est créé je peux lancer le fichier et me laisser guider par les messages derreurs ruby
+
+*generer controllers
+- rails generate controller restaurants
+- rails generate controller reviews new
+
+*creation methode ds controllers
+- restaurant : index, new, create, show    //creer view a chaque fin de methode
+- review : new, create                     //creer view a chaque fin de methode
+
+*creation view
